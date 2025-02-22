@@ -1,0 +1,187 @@
+.icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+}
+
+.vscode-light .icon.field {
+    background-image: url("../assets/icons/icons-old/field.svg")
+}
+.vscode-dark .icon.field {
+    background-image: url("../assets/icons/icons-old/dark/field.svg")
+}
+
+.vscode-light .icon.constant {
+    background-image: url("../assets/icons/icons-old/constant.svg")
+}
+.vscode-dark .icon.constant {
+    background-image: url("../assets/icons/icons-old/dark/constant.svg")
+}
+
+.vscode-light .icon.enum {
+    background-image: url("../assets/icons/icons-old/enum.svg")
+}
+.vscode-dark .icon.enum {
+    background-image: url("../assets/icons/icons-old/dark/enum.svg")
+}
+
+.vscode-light .icon.enum-member {
+    background-image: url("../assets/icons/icons-old/enum-member.svg")
+}
+.vscode-dark .icon.enum-member {
+    background-image: url("../assets/icons/icons-old/dark/enum-member.svg")
+}
+
+.vscode-light .icon.struct {
+    background-image: url("../assets/icons/icons-old/struct.svg")
+}
+.vscode-dark .icon.struct {
+    background-image: url("../assets/icons/icons-old/dark/struct.svg")
+}
+
+.vscode-light .icon.event {
+    background-image: url("../assets/icons/icons-old/event.svg")
+}
+.vscode-dark .icon.event {
+    background-image: url("../assets/icons/icons-old/dark/event.svg")
+}
+
+.vscode-light .icon.operator {
+    background-image: url("../assets/icons/icons-old/operator.svg")
+}
+.vscode-dark .icon.operator {
+    background-image: url("../assets/icons/icons-old/dark/operator.svg")
+}
+
+.vscode-light .icon.type-parameter {
+    background-image: url("../assets/icons/icons-old/type-parameter.svg")
+}
+.vscode-dark .icon.type-parameter {
+    background-image: url("../assets/icons/icons-old/dark/type-parameter.svg")
+}
+
+.vscode-light .icon.boolean {
+    background-image: url("../assets/icons/icons-old/boolean.svg")
+}
+.vscode-dark .icon.boolean {
+    background-image: url("../assets/icons/icons-old/dark/boolean.svg")
+}
+
+.vscode-light .icon.class {
+    background-image: url("../assets/icons/icons-old/class.svg")
+}
+.vscode-dark .icon.class {
+    background-image: url("../assets/icons/icons-old/dark/class.svg")
+}
+
+.vscode-light .icon.new-file {
+    background-image: url("../assets/icons/icons-old/new-file.svg")
+}
+.vscode-dark .icon.new-file {
+    background-image: url("../assets/icons/icons-old/dark/new-file.svg")
+}
+
+.vscode-light .icon.variable {
+    background-image: url("../assets/icons/icons-old/variable.svg")
+}
+.vscode-dark .icon.variable {
+    background-image: url("../assets/icons/icons-old/dark/variable.svg")
+}
+
+.vscode-light .icon.array {
+    background-image: url("../assets/icons/icons-old/array.svg")
+}
+.vscode-dark .icon.array {
+    background-image: url("../assets/icons/icons-old/dark/array.svg")
+}
+
+.vscode-light .icon.keyword {
+    background-image: url("../assets/icons/icons-old/keyword.svg")
+}
+.vscode-dark .icon.keyword {
+    background-image: url("../assets/icons/icons-old/dark/keyword.svg")
+}
+
+.vscode-light .icon.interface {
+    background-image: url("../assets/icons/icons-old/interface.svg")
+}
+.vscode-dark .icon.interface {
+    background-image: url("../assets/icons/icons-old/dark/interface.svg")
+}
+
+.vscode-light .icon.method {
+    background-image: url("../assets/icons/icons-old/method.svg")
+}
+.vscode-dark .icon.method {
+    background-image: url("../assets/icons/icons-old/dark/method.svg")
+}
+
+.vscode-light .icon.object {
+    background-image: url("../assets/icons/icons-old/object.svg")
+}
+.vscode-dark .icon.object {
+    background-image: url("../assets/icons/icons-old/dark/object.svg")
+}
+
+.vscode-light .icon.number {
+    background-image: url("../assets/icons/icons-old/number.svg")
+}
+.vscode-dark .icon.number {
+    background-image: url("../assets/icons/icons-old/dark/number.svg")
+}
+
+.vscode-light .icon.property {
+    background-image: url("../assets/icons/icons-old/property.svg")
+}
+.vscode-dark .icon.property {
+    background-image: url("../assets/icons/icons-old/dark/property.svg")
+}
+
+.vscode-light .icon.snippet {
+    background-image: url("../assets/icons/icons-old/snippet.svg")
+}
+.vscode-dark .icon.snippet {
+    background-image: url("../assets/icons/icons-old/dark/snippet.svg")
+}
+
+.vscode-light .icon.string {
+    background-image: url("../assets/icons/icons-old/string.svg")
+}
+.vscode-dark .icon.string {
+    background-image: url("../assets/icons/icons-old/dark/string.svg")
+}
+
+.vscode-light .icon.arrow-right {
+    background-image: url("../assets/icons/icons-old/arrow-right.svg")
+}
+.vscode-dark .icon.arrow-right {
+    background-image: url("../assets/icons/icons-old/dark/arrow-right.svg")
+}
+
+.vscode-light .icon.lightbulb {
+    background-image: url("../assets/icons/icons-old/lightbulb.svg")
+}
+.vscode-dark .icon.lightbulb {
+    background-image: url("../assets/icons/icons-old/dark/lightbulb.svg")
+}
+
+.vscode-light .icon.lightbulb-autofixable {
+    background-image: url("../assets/icons/icons-old/lightbulb-autofixable.svg")
+}
+.vscode-dark .icon.lightbulb-autofixable {
+    background-image: url("../assets/icons/icons-old/dark/lightbulb-autofixable.svg")
+}
+
+.vscode-light .icon.file,
+.vscode-dark .icon.file {
+    background-image: url("../assets/icons/icons-old/file.svg")
+}
+.vscode-light .icon.folder,
+.vscode-dark .icon.folder {
+    background-image: url("../assets/icons/icons-old/folder.svg")
+}
+.vscode-light .icon.folder-open,
+.vscode-dark .icon.folder-open {
+    background-image: url("../assets/icons/icons-old/folder-open.svg")
+}
