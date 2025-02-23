@@ -1,5 +1,5 @@
 html, body {
-	font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Roboto", "Droid Sans", sans-serif;
+	font-family: system-ui, "Segoe UI", "Roboto", "Droid Sans", sans-serif;
 	font-size: 14px;
 	line-height: 22px;
 	word-wrap: break-word;
@@ -140,7 +140,7 @@ pre {
 }
 
 code {
-	font-family: Consolas, "Courier New", monospace;
+	font-family: Consolas, monospace;
 	font-size: 14px;
 	line-height: 19px;
 }
