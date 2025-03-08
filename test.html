@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/visual-studio.css">
+    <link rel="stylesheet" href="./css/markdown.css">
+    <link rel="stylesheet" href="./css/icons-old.css">
+    <title>Markdown Preview</title>
+</head>
+<body class="vscode-light">
+
+<script src="./script.js"></script>
+
+<h1>Promise API</h1>
+<p>There are 6 static methods in the <code>Promise</code> class. We&#39;ll quickly cover their use cases here.</p>
+<h2>Promise.all</h2>
+<p>Let&#39;s say we want many promises to execute in parallel and wait until all of them are ready.</p>
+<p>For instance, download several URLs in parallel and process the content once they are all done.</p>
+<p>That&#39;s what <code>Promise.all</code> is for.</p>
+<p>The syntax is:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> promise = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(iterable);
+</code></pre>
+<p><code>Promise.all</code> takes an iterable (usually, an array of promises) and returns a new promise.</p>
+<p>The new promise resolves when all listed promises are resolved, and the array of their results becomes its result.</p>
+<p>For instance, the <code>Promise.all</code> below settles after 3 seconds, and then its result is an array <code>[1, 2, 3]</code>:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>([
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">3000</span>)), <span class="hljs-comment">// 1</span>
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">2</span>), <span class="hljs-number">2000</span>)), <span class="hljs-comment">// 2</span>
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">3</span>), <span class="hljs-number">1000</span>))  <span class="hljs-comment">// 3</span>
+]).<span class="hljs-title function_">then</span>(alert); <span class="hljs-comment">// 1,2,3 when promises are ready: each promise contributes an array member</span>
+</code></pre>
+<p>Please note that the order of the resulting array members is the same as in its source promises. Even though the first promise takes the longest time to resolve, it&#39;s still first in the array of results.</p>
+<p>A common trick is to map an array of job data into an array of promises, and then wrap that into <code>Promise.all</code>.</p>
+<p>For instance, if we have an array of URLs, we can fetch them all like this:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> urls = [
+  <span class="hljs-string">'https://api.github.com/users/iliakan'</span>,
+  <span class="hljs-string">'https://api.github.com/users/remy'</span>,
+  <span class="hljs-string">'https://api.github.com/users/jeresig'</span>
+];
+
+<span class="hljs-comment">// map every url to the promise of the fetch</span>
+<span class="hljs-keyword">let</span> requests = urls.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">url</span> =&gt;</span> <span class="hljs-title function_">fetch</span>(url));
+
+<span class="hljs-comment">// Promise.all waits until all jobs are resolved</span>
+<span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(requests)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">responses</span> =&gt;</span> responses.<span class="hljs-title function_">forEach</span>(
+    <span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-title function_">alert</span>(<span class="hljs-string">`<span class="hljs-subst">${response.url}</span>: <span class="hljs-subst">${response.status}</span>`</span>)
+  ));
+</code></pre>
+<p><img src="variable.png" alt=""></p>
+<p>A bigger example with fetching user information for an array of GitHub users by their names (we could fetch an array of goods by their ids, the logic is identical):</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> names = [<span class="hljs-string">'iliakan'</span>, <span class="hljs-string">'remy'</span>, <span class="hljs-string">'jeresig'</span>];
+
+<span class="hljs-keyword">let</span> requests = names.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">name</span> =&gt;</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`https://api.github.com/users/<span class="hljs-subst">${name}</span>`</span>));
+
+<span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(requests)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">responses</span> =&gt;</span> {
+    <span class="hljs-comment">// all responses are resolved successfully</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> response <span class="hljs-keyword">of</span> responses) {
+      <span class="hljs-title function_">alert</span>(<span class="hljs-string">`<span class="hljs-subst">${response.url}</span>: <span class="hljs-subst">${response.status}</span>`</span>); <span class="hljs-comment">// shows 200 for every url</span>
+    }
+
+    <span class="hljs-keyword">return</span> responses;
+  })
+  <span class="hljs-comment">// map array of responses into an array of response.json() to read their content</span>
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">responses</span> =&gt;</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(responses.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.<span class="hljs-title function_">json</span>())))
+  <span class="hljs-comment">// all JSON answers are parsed: "users" is the array of them</span>
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">users</span> =&gt;</span> users.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> <span class="hljs-title function_">alert</span>(user.<span class="hljs-property">name</span>)));
+</code></pre>
+<p><strong>If any of the promises is rejected, the promise returned by <code>Promise.all</code> immediately rejects with that error.</strong></p>
+<p>For instance:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>([
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">1000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">"Whoops!"</span>)), <span class="hljs-number">2000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">3</span>), <span class="hljs-number">3000</span>))
+]).<span class="hljs-title function_">catch</span>(alert); <span class="hljs-comment">// Error: Whoops!</span>
+</code></pre>
+<p>Here the second promise rejects in two seconds. That leads to an immediate rejection of <code>Promise.all</code>, so <code>.catch</code> executes: the rejection error becomes the outcome of the entire <code>Promise.all</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> In case of an error, other promises are ignored</p>
+<p>If one promise rejects, <code>Promise.all</code> immediately rejects, completely forgetting about the other ones in the list. Their results are ignored.</p>
+<p>For example, if there are multiple <code>fetch</code> calls, like in the example above, and one fails, the others will still continue to execute, but <code>Promise.all</code> won&#39;t watch them anymore. They will probably settle, but their results will be ignored.</p>
+<p><code>Promise.all</code> does nothing to cancel them, as there&#39;s no concept of &quot;cancellation&quot; in promises. In <a href="">another chapter</a> we&#39;ll cover <code>AbortController</code> that can help with that, but it&#39;s not a part of the Promise API.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> <code>Promise.all(iterable)</code> allows non-promise &quot;regular&quot; values in <code>iterable</code></p>
+<p>Normally, <code>Promise.all(...)</code> accepts an iterable (in most cases an array) of promises. But if any of those objects is not a promise, it&#39;s passed to the resulting array &quot;as is&quot;.</p>
+<p>For instance, here the results are <code>[1, 2, 3]</code>:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>([
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">1000</span>)
+  }),
+  <span class="hljs-number">2</span>,
+  <span class="hljs-number">3</span>
+]).<span class="hljs-title function_">then</span>(alert); <span class="hljs-comment">// 1, 2, 3</span>
+</code></pre>
+<p> So we are able to pass ready values to <code>Promise.all</code> where convenient.</p>
+</blockquote>
+<h2>Promise.allSettled</h2>
+<p><code>Promise.all</code> rejects as a whole if any promise rejects. That&#39;s good for &quot;all or nothing&quot; cases, when we need <em>all</em> results successful to proceed:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>([
+  <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'/template.html'</span>),
+  <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'/style.css'</span>),
+  <span class="hljs-title function_">fetch</span>(<span class="hljs-string">'/data.json'</span>)
+]).<span class="hljs-title function_">then</span>(render); <span class="hljs-comment">// render method needs results of all fetches</span>
+</code></pre>
+<p><code>Promise.allSettled</code> just waits for all promises to settle, regardless of the result. The resulting array has:</p>
+<ul>
+<li><code>{status:&quot;fulfilled&quot;, value:result}</code> for successful responses,</li>
+<li><code>{status:&quot;rejected&quot;, reason:error}</code> for errors.</li>
+</ul>
+<p>For example, we&#39;d like to fetch the information about multiple users. Even if one request fails, we&#39;re still interested in the others.</p>
+<p>Let&#39;s use <code>Promise.allSettled</code>:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> urls = [
+  <span class="hljs-string">'https://api.github.com/users/iliakan'</span>,
+  <span class="hljs-string">'https://api.github.com/users/remy'</span>,
+  <span class="hljs-string">'https://no-such-url'</span>
+];
+
+<span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">allSettled</span>(urls.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">url</span> =&gt;</span> <span class="hljs-title function_">fetch</span>(url)))
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">results</span> =&gt;</span> { <span class="hljs-comment">// (*)</span>
+    results.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">result, num</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">status</span> == <span class="hljs-string">"fulfilled"</span>) {
+        <span class="hljs-title function_">alert</span>(<span class="hljs-string">`<span class="hljs-subst">${urls[num]}</span>: <span class="hljs-subst">${result.value.status}</span>`</span>);
+      }
+      <span class="hljs-keyword">if</span> (result.<span class="hljs-property">status</span> == <span class="hljs-string">"rejected"</span>) {
+        <span class="hljs-title function_">alert</span>(<span class="hljs-string">`<span class="hljs-subst">${urls[num]}</span>: <span class="hljs-subst">${result.reason}</span>`</span>);
+      }
+    });
+  });
+</code></pre>
+<p>The <code>results</code> in the line <code>(*)</code> above will be:</p>
+<pre><code class="language-js">[
+  {<span class="hljs-attr">status</span>: <span class="hljs-string">'fulfilled'</span>, <span class="hljs-attr">value</span>: ...response...},
+  {<span class="hljs-attr">status</span>: <span class="hljs-string">'fulfilled'</span>, <span class="hljs-attr">value</span>: ...response...},
+  {<span class="hljs-attr">status</span>: <span class="hljs-string">'rejected'</span>, <span class="hljs-attr">reason</span>: ...error object...}
+]
+</code></pre>
+<p>So for each promise we get its status and <code>value/error</code>.</p>
+<h3>Polyfill</h3>
+<p>If the browser doesn&#39;t support <code>Promise.allSettled</code>, it&#39;s easy to polyfill:</p>
+<pre><code class="language-js"><span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Promise</span>.<span class="hljs-property">allSettled</span>) {
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">rejectHandler</span> = reason =&gt; ({ <span class="hljs-attr">status</span>: <span class="hljs-string">'rejected'</span>, reason });
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">resolveHandler</span> = value =&gt; ({ <span class="hljs-attr">status</span>: <span class="hljs-string">'fulfilled'</span>, value });
+
+  <span class="hljs-title class_">Promise</span>.<span class="hljs-property">allSettled</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">promises</span>) {
+    <span class="hljs-keyword">const</span> convertedPromises = promises.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">p</span> =&gt;</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(p).<span class="hljs-title function_">then</span>(resolveHandler, rejectHandler));
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(convertedPromises);
+  };
+}
+</code></pre>
+<p>In this code, <code>promises.map</code> takes input values, turns them into promises (just in case a non-promise was passed) with <code>p =&gt; Promise.resolve(p)</code>, and then adds <code>.then</code> handler to every one.</p>
+<p>That handler turns a successful result <code>value</code> into <code>{status:&#39;fulfilled&#39;, value}</code>, and an error <code>reason</code> into <code>{status:&#39;rejected&#39;, reason}</code>. That&#39;s exactly the format of <code>Promise.allSettled</code>.</p>
+<p>Now we can use <code>Promise.allSettled</code> to get the results of <em>all</em> given promises, even if some of them reject.</p>
+<h2>Promise.race</h2>
+<p>Similar to <code>Promise.all</code>, but waits only for the first settled promise and gets its result (or error).</p>
+<p>The syntax is:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> promise = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">race</span>(iterable);
+</code></pre>
+<p>For instance, here the result will be <code>1</code>:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">race</span>([
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">1000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">"Whoops!"</span>)), <span class="hljs-number">2000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">3</span>), <span class="hljs-number">3000</span>))
+]).<span class="hljs-title function_">then</span>(alert); <span class="hljs-comment">// 1</span>
+</code></pre>
+<p>The first promise here was fastest, so it became the result. After the first settled promise &quot;wins the race&quot;, all further results/errors are ignored.</p>
+<h2>Promise.any</h2>
+<p>Similar to <code>Promise.race</code>, but waits only for the first fulfilled promise and gets its result. If all of the given promises are rejected, then the returned promise is rejected with <code>AggregateError</code> - a special error object that stores all promise errors in its <code>errors</code> property.</p>
+<p>The syntax is:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> promise = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">any</span>(iterable);
+</code></pre>
+<p>For instance, here the result will be <code>1</code>:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">any</span>([
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">"Whoops!"</span>)), <span class="hljs-number">1000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">2000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">3</span>), <span class="hljs-number">3000</span>))
+]).<span class="hljs-title function_">then</span>(alert); <span class="hljs-comment">// 1</span>
+</code></pre>
+<p>The first promise here was fastest, but it was rejected, so the second promise became the result. After the first fulfilled promise &quot;wins the race&quot;, all further results are ignored.</p>
+<p>Here&#39;s an example when all promises fail:</p>
+<pre><code class="language-js"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">any</span>([
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">"Ouch!"</span>)), <span class="hljs-number">1000</span>)),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">"Error!"</span>)), <span class="hljs-number">2000</span>))
+]).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>); <span class="hljs-comment">// AggregateError</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error.<span class="hljs-property">errors</span>[<span class="hljs-number">0</span>]); <span class="hljs-comment">// Error: Ouch!</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error.<span class="hljs-property">errors</span>[<span class="hljs-number">1</span>]); <span class="hljs-comment">// Error: Error!</span>
+});
+</code></pre>
+<p>As you can see, error objects for failed promises are available in the <code>errors</code> property of the <code>AggregateError</code> object.</p>
+<h2>Promise.resolve/reject</h2>
+<p>Methods <code>Promise.resolve</code> and <code>Promise.reject</code> are rarely needed in modern code, because <code>async/await</code> syntax (we&#39;ll cover it <a href="">a bit later</a>) makes them somewhat obsolete.</p>
+<p>We cover them here for completeness and for those who can&#39;t use <code>async/await</code> for some reason.</p>
+<h3>Promise.resolve</h3>
+<p><code>Promise.resolve(value)</code> creates a resolved promise with the result <code>value</code>.</p>
+<p>Same as:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-title function_">resolve</span>(value));
+</code></pre>
+<p>The method is used for compatibility, when a function is expected to return a promise.</p>
+<p>For example, the <code>loadCached</code> function below fetches a URL and remembers (caches) its content. For future calls with the same URL it immediately gets the previous content from cache, but uses <code>Promise.resolve</code> to make a promise of it, so the returned value is always a promise:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">loadCached</span>(<span class="hljs-params">url</span>) {
+  <span class="hljs-keyword">if</span> (cache.<span class="hljs-title function_">has</span>(url)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(cache.<span class="hljs-title function_">get</span>(url)); <span class="hljs-comment">// (*)</span>
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">fetch</span>(url)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">text</span>())
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">text</span> =&gt;</span> {
+      cache.<span class="hljs-title function_">set</span>(url,text);
+      <span class="hljs-keyword">return</span> text;
+    });
+}
+</code></pre>
+<p>We can write <code>loadCached(url).then(...)</code>, because the function is guaranteed to return a promise. We can always use <code>.then</code> after <code>loadCached</code>. That&#39;s the purpose of <code>Promise.resolve</code> in the line <code>(*)</code>.</p>
+<h3>Promise.reject</h3>
+<p><code>Promise.reject(error)</code> creates a rejected promise with <code>error</code>.</p>
+<p>Same as:</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-title function_">reject</span>(error));
+</code></pre>
+<p>In practice, this method is almost never used.</p>
+<h2>Summary</h2>
+<p>There are 6 static methods of <code>Promise</code> class:</p>
+<ol>
+<li><code>Promise.all(promises)</code> - waits for all promises to resolve and returns an array of their results. If any of the given promises rejects, it becomes the error of <code>Promise.all</code>, and all other results are ignored.</li>
+<li><code>Promise.allSettled(promises)</code> (recently added method) - waits for all promises to settle and returns their results as an array of objects with:<ul>
+<li><code>status</code>: <code>&quot;fulfilled&quot;</code> or <code>&quot;rejected&quot;</code></li>
+<li><code>value</code> (if fulfilled) or <code>reason</code> (if rejected).</li>
+</ul>
+</li>
+<li><code>Promise.race(promises)</code> - waits for the first promise to settle, and its result/error becomes the outcome.</li>
+<li><code>Promise.any(promises)</code> (recently added method) - waits for the first promise to fulfill, and its result becomes the outcome. If all of the given promises are rejected, <code>AggregateError</code> becomes the error of <code>Promise.any</code>.</li>
+<li><code>Promise.resolve(value)</code> - makes a resolved promise with the given value.</li>
+<li><code>Promise.reject(error)</code> - makes a rejected promise with the given error.</li>
+</ol>
+<p>Of all these, <code>Promise.all</code> is probably the most common in practice.</p>
+
+</body>
+</html>

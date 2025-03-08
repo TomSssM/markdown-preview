@@ -30,6 +30,14 @@ class Theme {
     }
 }
 
-document.getElementById('switch').addEventListener('click', Theme.onThemeChange);
+window.addEventListener('DOMContentLoaded', () => {
+    const themeSwitch = document.getElementById('switch');
+
+    if (!themeSwitch) {
+        return;
+    }
+
+    themeSwitch.addEventListener('click', Theme.onThemeChange);
+});
 
 Theme.initTheme();

@@ -1,5 +1,5 @@
 html, body {
-	font-family: system-ui, "Segoe UI", "Roboto", "Droid Sans", sans-serif;
+	font-family: "Segoe UI", sans-serif;
 	font-size: 14px;
 	line-height: 22px;
 	word-wrap: break-word;
@@ -16,7 +16,7 @@ p, ol, ul, pre {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: 600;
+	font-weight: 500;
 	line-height: 1.25;
 	margin-top: 24px;
 	margin-bottom: 16px;
