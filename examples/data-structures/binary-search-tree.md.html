@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/vs.css">
+  <link rel="stylesheet" href="../../css/markdown-min.css">
+  <link rel="stylesheet" href="../../css/icons-old.css">
+  <title>Binary Search Tree</title>
+</head>
+<body class="vscode-light">
+<script src="../../script.js"></script>
+
+<script type="application/json">{"rawFilePath":"../../../../../source/tutorials/algorithms-tutorial-js/structure/data-structures/binary-search-tree.md","theme":{"id":"code","name":"The Holidays Code","light":"code-light","dark":"code-dark"}}</script>
+
+<h1>Binary Search Tree</h1>
+<p>Binary Search Tree is something and here comes the beautiful explanation and everything about it to get the learner going with code samples and so on and so forth you know</p>
+<img height=200 src="./binary-search-tree.png" />
+
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">data, left = <span class="hljs-literal">null</span>, right = <span class="hljs-literal">null</span></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">data</span> = data;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">left</span> = left;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">right</span> = right;
+  }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">BST</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span> = <span class="hljs-literal">null</span>;
+  }
+
+  <span class="hljs-title function_">add</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-keyword">const</span> node = <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>;
+    <span class="hljs-keyword">if</span> (node === <span class="hljs-literal">null</span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(data);
+      <span class="hljs-keyword">return</span>;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> searchTree = <span class="hljs-keyword">function</span>(<span class="hljs-params">node</span>) {
+        <span class="hljs-keyword">if</span> (data &lt; node.<span class="hljs-property">data</span>) {
+          <span class="hljs-keyword">if</span> (node.<span class="hljs-property">left</span> === <span class="hljs-literal">null</span>) {
+            node.<span class="hljs-property">left</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(data);
+            <span class="hljs-keyword">return</span>;
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (node.<span class="hljs-property">left</span> !== <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-title function_">searchTree</span>(node.<span class="hljs-property">left</span>);
+          }
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data &gt; node.<span class="hljs-property">data</span>) {
+          <span class="hljs-keyword">if</span> (node.<span class="hljs-property">right</span> === <span class="hljs-literal">null</span>) {
+            node.<span class="hljs-property">right</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(data);
+            <span class="hljs-keyword">return</span>;
+          } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (node.<span class="hljs-property">right</span> !== <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-title function_">searchTree</span>(node.<span class="hljs-property">right</span>);
+          }
+        } <span class="hljs-keyword">else</span> {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+      };
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">searchTree</span>(node);
+    }
+  }
+
+  <span class="hljs-title function_">findMin</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> current = <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>;
+    <span class="hljs-keyword">while</span> (current.<span class="hljs-property">left</span> !== <span class="hljs-literal">null</span>) {
+      current = current.<span class="hljs-property">left</span>;
+    }
+    <span class="hljs-keyword">return</span> current.<span class="hljs-property">data</span>;
+  }
+
+  <span class="hljs-title function_">findMax</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> current = <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>;
+    <span class="hljs-keyword">while</span> (current.<span class="hljs-property">right</span> !== <span class="hljs-literal">null</span>) {
+      current = current.<span class="hljs-property">right</span>;
+    }
+    <span class="hljs-keyword">return</span> current.<span class="hljs-property">data</span>;
+  }
+
+  <span class="hljs-title function_">find</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-keyword">let</span> current = <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>;
+    <span class="hljs-keyword">while</span> (current.<span class="hljs-property">data</span> !== data) {
+      <span class="hljs-keyword">if</span> (data &lt; current.<span class="hljs-property">data</span>) {
+        current = current.<span class="hljs-property">left</span>;
+      } <span class="hljs-keyword">else</span> {
+        current = current.<span class="hljs-property">right</span>;
+      }
+
+      <span class="hljs-keyword">if</span> (current === <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> current;
+  }
+
+  <span class="hljs-title function_">isPresent</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-keyword">let</span> current = <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>;
+    <span class="hljs-keyword">while</span> (current) {
+      <span class="hljs-keyword">if</span> (data === current.<span class="hljs-property">data</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">if</span> (data &lt; current.<span class="hljs-property">data</span>) {
+        current = current.<span class="hljs-property">left</span>;
+      } <span class="hljs-keyword">else</span> {
+        current = current.<span class="hljs-property">right</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-title function_">remove</span>(<span class="hljs-params">data</span>) {
+    <span class="hljs-keyword">const</span> removeNode = <span class="hljs-keyword">function</span>(<span class="hljs-params">node, data</span>) {
+      <span class="hljs-comment">// if the root was empty</span>
+      <span class="hljs-keyword">if</span> (node === <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+      }
+
+      <span class="hljs-keyword">if</span> (data === node.<span class="hljs-property">data</span>) {
+        <span class="hljs-comment">// node has no children</span>
+        <span class="hljs-keyword">if</span> (node.<span class="hljs-property">left</span> === <span class="hljs-literal">null</span> &amp;&amp; node.<span class="hljs-property">right</span> === <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+        <span class="hljs-comment">// node has no left child</span>
+        <span class="hljs-keyword">if</span> (node.<span class="hljs-property">left</span> === <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">return</span> node.<span class="hljs-property">right</span>;
+        }
+        <span class="hljs-comment">// node has no right child</span>
+        <span class="hljs-keyword">if</span> (node.<span class="hljs-property">right</span> === <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">return</span> node.<span class="hljs-property">left</span>;
+        }
+        <span class="hljs-comment">// node has two children</span>
+        <span class="hljs-keyword">var</span> tempNode = node.<span class="hljs-property">right</span>;
+        <span class="hljs-keyword">while</span> (tempNode.<span class="hljs-property">left</span> !== <span class="hljs-literal">null</span>) {
+          tempNode = tempNode.<span class="hljs-property">left</span>;
+        }
+        node.<span class="hljs-property">data</span> = tempNode.<span class="hljs-property">data</span>;
+        node.<span class="hljs-property">right</span> = <span class="hljs-title function_">removeNode</span>(node.<span class="hljs-property">right</span>, tempNode.<span class="hljs-property">data</span>);
+        <span class="hljs-keyword">return</span> node;
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data &lt; node.<span class="hljs-property">data</span>) {
+        node.<span class="hljs-property">left</span> = <span class="hljs-title function_">removeNode</span>(node.<span class="hljs-property">left</span>, data);
+        <span class="hljs-comment">// do note that we have to return the node that was</span>
+        <span class="hljs-comment">// passed in order not to orphan, say, the root node</span>
+        <span class="hljs-comment">// via implicitly returning undefined</span>
+        <span class="hljs-keyword">return</span> node;
+      } <span class="hljs-keyword">else</span> {
+        node.<span class="hljs-property">right</span> = <span class="hljs-title function_">removeNode</span>(node.<span class="hljs-property">right</span>, data);
+        <span class="hljs-keyword">return</span> node;
+      }
+    }
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span> = <span class="hljs-title function_">removeNode</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>, data);
+  }
+
+  <span class="hljs-title function_">isBalanced</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">findMinHeight</span>() &gt;= <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">findMaxHeight</span>() - <span class="hljs-number">1</span>)
+  }
+
+  <span class="hljs-title function_">findMinHeight</span>(<span class="hljs-params">node = <span class="hljs-variable language_">this</span>.root</span>) {
+      <span class="hljs-keyword">if</span> (node === <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+      }
+      <span class="hljs-keyword">let</span> left = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">findMinHeight</span>(node.<span class="hljs-property">left</span>);
+      <span class="hljs-keyword">let</span> right = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">findMinHeight</span>(node.<span class="hljs-property">right</span>);
+
+      <span class="hljs-comment">// here we are going to do +1 to the lesser value so that</span>
+      <span class="hljs-comment">// if at least one returns -1 we don&#x27;t count it as a step</span>
+      <span class="hljs-keyword">if</span> (left &lt; right) {
+          <span class="hljs-keyword">return</span> left + <span class="hljs-number">1</span>;
+      } <span class="hljs-keyword">else</span> {
+          <span class="hljs-keyword">return</span> right + <span class="hljs-number">1</span>;
+      };
+      <span class="hljs-comment">// or</span>
+      <span class="hljs-comment">// return Math.min(left, right) + 1;</span>
+  }
+
+  <span class="hljs-title function_">findMaxHeight</span>(<span class="hljs-params">node = <span class="hljs-variable language_">this</span>.root</span>) {
+      <span class="hljs-keyword">if</span> (node === <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+      }
+      <span class="hljs-keyword">let</span> left = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">findMaxHeight</span>(node.<span class="hljs-property">left</span>);
+      <span class="hljs-keyword">let</span> right = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">findMaxHeight</span>(node.<span class="hljs-property">right</span>);
+
+      <span class="hljs-comment">// this here we are going to do +1 to the greater value so that</span>
+      <span class="hljs-comment">// so long as there is at least one child we count it as a step</span>
+      <span class="hljs-keyword">if</span> (left &gt; right) {
+          <span class="hljs-keyword">return</span> left + <span class="hljs-number">1</span>;
+      } <span class="hljs-keyword">else</span> {
+          <span class="hljs-keyword">return</span> right + <span class="hljs-number">1</span>;
+      };
+      <span class="hljs-comment">// or</span>
+      <span class="hljs-comment">// return Math.max(left, right) + 1;</span>
+  }
+
+  <span class="hljs-title function_">invert</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// this function turns Tree A into a such Tree B</span>
+    <span class="hljs-comment">// that the inOrder traversal for Tree B is going</span>
+    <span class="hljs-comment">// to return the same array as for Tree A except with</span>
+    <span class="hljs-comment">// numbers in the reversed order</span>
+    <span class="hljs-comment">// this way if the inorder traversal for Tree A is [10, 12, 22, 34], the</span>
+    <span class="hljs-comment">// inOrder Traversal for Tree B is going to be [34, 22, 12, 10]</span>
+
+    <span class="hljs-keyword">if</span>(!<span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+
+    <span class="hljs-keyword">const</span> swap = <span class="hljs-keyword">function</span>(<span class="hljs-params">node</span>) {
+      <span class="hljs-comment">// all we gotta do is swap the left and right</span>
+      <span class="hljs-comment">// pointers for every node</span>
+
+      <span class="hljs-keyword">if</span>(!node.<span class="hljs-property">right</span> &amp;&amp; !node.<span class="hljs-property">left</span>) <span class="hljs-keyword">return</span> node;
+      <span class="hljs-keyword">if</span>(!node.<span class="hljs-property">right</span>) {
+        node.<span class="hljs-property">right</span> = node.<span class="hljs-property">left</span>;
+        node.<span class="hljs-property">left</span> = <span class="hljs-literal">null</span>;
+        node.<span class="hljs-property">right</span> = <span class="hljs-title function_">swap</span>(node.<span class="hljs-property">right</span>);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!node.<span class="hljs-property">left</span>) {
+        node.<span class="hljs-property">left</span> = node.<span class="hljs-property">right</span>;
+        node.<span class="hljs-property">right</span> = <span class="hljs-literal">null</span>;
+        node.<span class="hljs-property">left</span> = <span class="hljs-title function_">swap</span>(node.<span class="hljs-property">left</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">let</span> left = node.<span class="hljs-property">left</span>;
+        node.<span class="hljs-property">left</span> = node.<span class="hljs-property">right</span>;
+        node.<span class="hljs-property">right</span> = left;
+        node.<span class="hljs-property">left</span> = <span class="hljs-title function_">swap</span>(node.<span class="hljs-property">left</span>);
+        node.<span class="hljs-property">right</span> = <span class="hljs-title function_">swap</span>(node.<span class="hljs-property">right</span>);
+      }
+      <span class="hljs-keyword">return</span> node;
+    };
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span> = <span class="hljs-title function_">swap</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">root</span>);
+  }
+}
+</code></pre><h2>Example</h2>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> bst = <span class="hljs-keyword">new</span> <span class="hljs-title function_">BST</span>();
+
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">9</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">4</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">17</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">3</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">6</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">22</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">7</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">20</span>);
+
+bst.<span class="hljs-title function_">findMin</span>(); <span class="hljs-comment">// =&gt; 3</span>
+bst.<span class="hljs-title function_">remove</span>(<span class="hljs-number">3</span>);
+bst.<span class="hljs-title function_">find</span>(<span class="hljs-number">7</span>); <span class="hljs-comment">// =&gt; Node(7)</span>
+bst.<span class="hljs-title function_">findMin</span>(); <span class="hljs-comment">// =&gt; 4</span>
+bst.<span class="hljs-title function_">findMax</span>(); <span class="hljs-comment">// =&gt; 22</span>
+
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">3</span>);
+bst.<span class="hljs-title function_">isPresent</span>(<span class="hljs-number">3</span>); <span class="hljs-comment">// true</span>
+bst.<span class="hljs-title function_">findMinHeight</span>(); <span class="hljs-comment">// =&gt; 1</span>
+bst.<span class="hljs-title function_">findMaxHeight</span>(); <span class="hljs-comment">// =&gt; 3</span>
+bst.<span class="hljs-title function_">isBalanced</span>(); <span class="hljs-comment">// false</span>
+
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">10</span>);
+bst.<span class="hljs-title function_">invert</span>(); <span class="hljs-comment">// invert</span>
+bst.<span class="hljs-title function_">findMinHeight</span>(); <span class="hljs-comment">// =&gt; 2</span>
+bst.<span class="hljs-title function_">findMaxHeight</span>(); <span class="hljs-comment">// =&gt; 3</span>
+bst.<span class="hljs-title function_">isBalanced</span>(); <span class="hljs-comment">// =&gt; true</span>
+</code></pre><h2>Breadth-First Search</h2>
+<p>Breadth-First Search is something and here comes the beautiful explanation and everything about it to get the learner going with code samples and so on and so forth you know</p>
+<img src="./breadth-first-search.gif" />
+
+<h3>Recursive</h3>
+<p>Recursive version is something and here comes the beautiful explanation and everything about it to get the learner going with code samples and so on and so forth you know</p>
+<p><strong>Note:</strong> The function <code>breadthFirstSearch</code> accepts an instance of <code>BST</code></p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">breadthFirstSearch</span>(<span class="hljs-params">bst</span>) {
+  <span class="hljs-keyword">const</span> result = [];
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">traverse</span> = (<span class="hljs-params">node</span>) =&gt; {
+    result.<span class="hljs-title function_">push</span>(node.<span class="hljs-property">data</span>);
+
+    <span class="hljs-keyword">if</span> (node.<span class="hljs-property">left</span>) {
+      <span class="hljs-title function_">traverse</span>(node.<span class="hljs-property">left</span>);
+    }
+
+    <span class="hljs-keyword">if</span> (node.<span class="hljs-property">right</span>) {
+      <span class="hljs-title function_">traverse</span>(node.<span class="hljs-property">right</span>);
+    }
+  };
+
+  <span class="hljs-title function_">traverse</span>(bst.<span class="hljs-property">root</span>);
+
+  <span class="hljs-keyword">return</span> result;
+}
+</code></pre><h4>Example</h4>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> bst = <span class="hljs-keyword">new</span> <span class="hljs-title function_">BST</span>();
+
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">9</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">4</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">17</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">3</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">6</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">22</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">7</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">20</span>);
+
+<span class="hljs-title function_">breadthFirstSearch</span>(bst); <span class="hljs-comment">// 3,4,5,6,7,9,10,17,20,22</span>
+</code></pre><h3>Non-Recursive</h3>
+<p>Non-Recursive version is something and here comes the beautiful explanation and everything about it to get the learner going with code samples and so on and so forth you know</p>
+<p><strong>Note:</strong> The function <code>breadthFirstSearch</code> accepts an instance of <code>BST</code> and also utilizes the <a href="./queue.md.html"><code>Queue</code></a> Data Structure</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">breadthFirstSearch</span>(<span class="hljs-params">bst</span>) {
+  <span class="hljs-keyword">const</span> result = [];
+  <span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Queue</span>();
+
+  queue.<span class="hljs-title function_">enqueue</span>(bst.<span class="hljs-property">root</span>);
+
+  <span class="hljs-keyword">while</span> (!queue.<span class="hljs-title function_">isEmpty</span>()) {
+    <span class="hljs-keyword">const</span> node = queue.<span class="hljs-title function_">dequeue</span>();
+
+    result.<span class="hljs-title function_">push</span>(node.<span class="hljs-property">data</span>);
+
+    <span class="hljs-keyword">if</span> (node.<span class="hljs-property">left</span>) {
+      queue.<span class="hljs-title function_">enqueue</span>(node.<span class="hljs-property">left</span>);
+    }
+
+    <span class="hljs-keyword">if</span> (node.<span class="hljs-property">right</span>) {
+      queue.<span class="hljs-title function_">enqueue</span>(node.<span class="hljs-property">right</span>);
+    }
+  }
+
+  <span class="hljs-keyword">return</span> result;
+}
+</code></pre><h4>Example</h4>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> bst = <span class="hljs-keyword">new</span> <span class="hljs-title function_">BST</span>();
+
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">9</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">4</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">17</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">3</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">6</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">22</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">7</span>);
+bst.<span class="hljs-title function_">add</span>(<span class="hljs-number">20</span>);
+
+<span class="hljs-title function_">breadthFirstSearch</span>(bst); <span class="hljs-comment">// 3,4,5,6,7,9,10,17,20,22</span>
+</code></pre>
+
+</body>
+</html>

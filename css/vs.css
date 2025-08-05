@@ -1,0 +1,193 @@
+/*
+	Visual Studio Light
+ */
+
+.vscode-light pre {
+	color: #000;
+	background-color: #fff;
+}
+
+.vscode-light .hljs-keyword,
+.vscode-light .hljs-literal,
+.vscode-light .hljs-variable,
+.vscode-light .hljs-type {
+	color: #00f;
+}
+
+.vscode-light .hljs-number {
+	color: #008000;
+}
+
+.vscode-light .hljs-string,
+.vscode-light .hljs-selector-id,
+.vscode-light .hljs-selector-tag,
+.vscode-light .hljs-selector-class,
+.vscode-light .hljs-selector-pseudo,
+.vscode-light .hljs-selector-attr {
+	color: #a31515;
+}
+
+.vscode-light .hljs-template-tag,
+.vscode-light .hljs-meta-string,
+.vscode-light .hljs-regexp {
+	color: #9A5334;
+}
+
+.vscode-light .hljs-comment {
+	color: #008000;
+}
+
+.vscode-light .hljs-attribute {
+	color: #f00;
+}
+
+.vscode-light .hljs-name,
+.vscode-light .hljs-tag {
+	color: #a31515;
+}
+
+.vscode-light .hljs-built_in,
+.vscode-light .hljs-builtin-name {
+	color: #000;
+}
+
+.vscode-light .hljs-meta,
+.vscode-light .hljs-meta-keyword,
+.vscode-light .hljs-attr,
+.vscode-light .hljs-subst,
+.vscode-light .hljs-class,
+.vscode-light .hljs-link,
+.vscode-light .hljs-symbol,
+.vscode-light .hljs-function,
+.vscode-light .hljs-title,
+.vscode-light .hljs-params,
+.vscode-light .hljs-formula,
+.vscode-light .hljs-bullet,
+.vscode-light .hljs-section,
+.vscode-light .hljs-quote,
+.vscode-light .hljs-doctag,
+.vscode-light .hljs-template-variable {
+	color: #000;
+}
+
+.vscode-light .hljs-addition {
+	display: inline-block;
+	width: 100%;
+	color: rgb(155, 185, 85);
+	background-color: rgba(156, 204, 44, 0.25);
+}
+
+.vscode-light .hljs-deletion {
+	display: inline-block;
+	width: 100%;
+	color: rgb(255, 0, 0);
+	background-color: rgba(255, 0, 0, 0.2);
+}
+
+.vscode-light .hljs-emphasis {
+	font-style: italic;
+}
+
+.vscode-light .hljs-strong {
+	font-weight: bold;
+}
+
+/*
+	Visual Studio Dark
+ */
+
+.vscode-dark pre {
+	color: #d4d4d4;
+	background-color: #1e1e1e;
+}
+
+.vscode-dark .hljs-keyword,
+.vscode-dark .hljs-literal,
+.vscode-dark .hljs-meta,
+.vscode-dark .hljs-meta-keyword {
+	color: #569CD6;
+}
+
+.vscode-dark .hljs-number {
+	color: #B8D7A3;
+}
+
+.vscode-dark .hljs-string {
+	color: #D69D85;
+}
+
+.vscode-dark .hljs-selector-id,
+.vscode-dark .hljs-selector-tag,
+.vscode-dark .hljs-selector-class,
+.vscode-dark .hljs-selector-pseudo,
+.vscode-dark .hljs-selector-attr {
+	color: #D7BA7D;
+}
+
+.vscode-dark .hljs-template-tag,
+.vscode-dark .hljs-meta-string,
+.vscode-dark .hljs-regexp {
+	color: #9A5334;
+}
+
+.vscode-dark .hljs-comment {
+	color: #57A64A;
+}
+
+.vscode-dark .hljs-attribute {
+	color: #9CDCFE;
+}
+
+.vscode-dark .hljs-tag {
+	color: #9B9B9B;
+}
+
+.vscode-dark .hljs-name {
+	color: #569CD6;
+}
+
+.vscode-dark .hljs-variable,
+.vscode-dark .hljs-type,
+.vscode-dark .hljs-built_in,
+.vscode-dark .hljs-builtin-name {
+	color: #4EC9B0;
+}
+
+.vscode-dark .hljs-attr,
+.vscode-dark .hljs-subst,
+.vscode-dark .hljs-class,
+.vscode-dark .hljs-link,
+.vscode-dark .hljs-symbol,
+.vscode-dark .hljs-function,
+.vscode-dark .hljs-title,
+.vscode-dark .hljs-params,
+.vscode-dark .hljs-formula,
+.vscode-dark .hljs-bullet,
+.vscode-dark .hljs-section,
+.vscode-dark .hljs-quote,
+.vscode-dark .hljs-doctag,
+.vscode-dark .hljs-template-variable {
+	color: #d4d4d4;
+}
+
+.vscode-dark .hljs-addition {
+	display: inline-block;
+	width: 100%;
+	color: rgb(155, 185, 85);
+	background-color: rgba(156, 204, 44, 0.2);
+}
+
+.vscode-dark .hljs-deletion {
+	display: inline-block;
+	width: 100%;
+	color: rgb(255, 0, 0);
+	background-color: rgba(255, 0, 0, 0.2);
+}
+
+.vscode-dark .hljs-emphasis {
+	font-style: italic;
+}
+
+.vscode-dark .hljs-strong {
+	font-weight: bold;
+}

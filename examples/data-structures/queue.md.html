@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/vs.css">
+  <link rel="stylesheet" href="../../css/markdown-min.css">
+  <link rel="stylesheet" href="../../css/icons-old.css">
+  <title>Queue</title>
+</head>
+<body class="vscode-light">
+<script src="../../script.js"></script>
+
+<script type="application/json">{"rawFilePath":"../../../../../source/tutorials/algorithms-tutorial-js/structure/data-structures/queue.md","theme":{"id":"code","name":"The Holidays Code","light":"code-light","dark":"code-dark"}}</script>
+
+<h1>Queue</h1>
+<p>Queue is something and here comes the beautiful explanation and everything about it to get the learner going with code samples and so on and so forth you know</p>
+<img height=150 src="./queue.png" />
+
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Queue</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">collection</span> = [];
+  }
+
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">front</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">collection</span>[<span class="hljs-number">0</span>];
+  }
+
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">size</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">collection</span>.<span class="hljs-property">length</span>;
+  }
+
+  <span class="hljs-title function_">print</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> [...<span class="hljs-variable language_">this</span>.<span class="hljs-property">collection</span>];
+  }
+
+  <span class="hljs-title function_">enqueue</span>(<span class="hljs-params">element</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">collection</span>.<span class="hljs-title function_">push</span>(element);
+  }
+
+  <span class="hljs-title function_">dequeue</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">collection</span>.<span class="hljs-title function_">shift</span>();
+  }
+
+  <span class="hljs-title function_">isEmpty</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">size</span> === <span class="hljs-number">0</span>;
+  }
+}
+</code></pre><h2>Example</h2>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Queue</span>();
+queue.<span class="hljs-title function_">enqueue</span>(<span class="hljs-string">&#x27;a&#x27;</span>);
+queue.<span class="hljs-title function_">enqueue</span>(<span class="hljs-string">&#x27;b&#x27;</span>);
+queue.<span class="hljs-title function_">enqueue</span>(<span class="hljs-string">&#x27;c&#x27;</span>);
+queue.<span class="hljs-title function_">print</span>(); <span class="hljs-comment">// =&gt; [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span>
+queue.<span class="hljs-title function_">dequeue</span>(); <span class="hljs-comment">// =&gt; &#x27;a&#x27; &lt;- [&#x27;b&#x27;, &#x27;c&#x27;]</span>
+queue.<span class="hljs-property">front</span>; <span class="hljs-comment">// =&gt; &#x27;b&#x27;</span>
+queue.<span class="hljs-title function_">print</span>(); <span class="hljs-comment">// =&gt; [&#x27;b&#x27;, &#x27;c&#x27;]</span>
+</code></pre>
+
+</body>
+</html>
