@@ -43,9 +43,9 @@
 <span class="line"><span style="color:#C586C0">import</span><span style="color:#9CDCFE"> errorMiddleware</span><span style="color:#C586C0"> from</span><span style="color:#CE9178"> './middleware/errorMiddleware'</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"><span style="color:#C586C0">import</span><span style="color:#9CDCFE"> router</span><span style="color:#C586C0"> from</span><span style="color:#CE9178"> './routes'</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> { </span><span style="color: #9CDCFE;">STATIC_PATH</span><span style="color:#D4D4D4">, </span><span style="color: #9CDCFE;">MONGO_URI</span><span style="color:#D4D4D4"> } = </span><span style="color:#9CDCFE">config</span><span style="color:#D4D4D4">;</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE;">STATIC_PATH</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE;">MONGO_URI</span><span style="color:#D4D4D4"> } = </span><span style="color:#9CDCFE">config</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> app</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">express</span><span style="color:#D4D4D4">();</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> app</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">express</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">use</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">express</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">json</span><span style="color:#D4D4D4">());</span></span>
 <span class="line"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">use</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">express</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">urlencoded</span><span style="color:#D4D4D4">({ </span><span style="color:#9CDCFE">extended:</span><span style="color:#569CD6"> false</span><span style="color:#D4D4D4"> }));</span></span>
@@ -54,7 +54,7 @@
 <span class="line"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">use</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">router</span><span style="color:#D4D4D4">);</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#9CDCFE">mongoose</span></span>
-<span class="line"><span style="color:#D4D4D4">  .</span><span style="color:#DCDCAA">connect</span><span style="color:#D4D4D4">(</span><span style="color: #9CDCFE;">MONGO_URI</span><span style="color:#D4D4D4">, {</span></span>
+<span class="line"><span style="color:#D4D4D4">  .</span><span style="color:#DCDCAA">connect</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE;">MONGO_URI</span><span style="color:#D4D4D4">, {</span></span>
 <span class="line"><span style="color:#9CDCFE">    useNewUrlParser:</span><span style="color:#569CD6"> true</span><span style="color:#D4D4D4">,</span></span>
 <span class="line"><span style="color:#9CDCFE">    useCreateIndex:</span><span style="color:#569CD6"> true</span><span style="color:#D4D4D4">,</span></span>
 <span class="line"><span style="color:#9CDCFE">    useUnifiedTopology:</span><span style="color:#569CD6"> true</span><span style="color:#D4D4D4">,</span></span>
@@ -67,11 +67,11 @@
 <span class="line"><span style="color:#9CDCFE">  res</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">redirect</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'/'</span><span style="color:#D4D4D4">);</span></span>
 <span class="line"><span style="color:#D4D4D4">});</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C586C0">if</span><span style="color:#D4D4D4"> (</span><span style="color:#9CDCFE">process</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">env</span><span style="color:#D4D4D4">.</span><span style="color:#4FC1FF">NODE_ENV</span><span style="color:#D4D4D4"> === </span><span style="color:#CE9178">'production'</span><span style="color:#D4D4D4">) {</span></span>
-<span class="line"><span style="color:#9CDCFE">  app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">use</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">express</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">static</span><span style="color:#D4D4D4">(</span><span style="color:#4FC1FF">STATIC_PATH</span><span style="color:#D4D4D4">));</span></span>
+<span class="line"><span style="color:#C586C0">if</span><span style="color:#D4D4D4"> (</span><span style="color:#9CDCFE">process</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">env</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">NODE_ENV</span><span style="color:#D4D4D4"> === </span><span style="color:#CE9178">'production'</span><span style="color:#D4D4D4">) {</span></span>
+<span class="line"><span style="color:#9CDCFE">  app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">use</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">express</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">static</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">STATIC_PATH</span><span style="color:#D4D4D4">));</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#9CDCFE">  app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'*'</span><span style="color:#D4D4D4">, (</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">res</span><span style="color:#D4D4D4">) </span><span style="color:#569CD6">=&gt;</span><span style="color:#D4D4D4"> {</span></span>
-<span class="line"><span style="color:#9CDCFE">    res</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">sendFile</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">resolve</span><span style="color:#D4D4D4">(</span><span style="color:#4FC1FF">STATIC_PATH</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">'index.html'</span><span style="color:#D4D4D4">));</span></span>
+<span class="line"><span style="color:#9CDCFE">    res</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">sendFile</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">resolve</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">STATIC_PATH</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">'index.html'</span><span style="color:#D4D4D4">));</span></span>
 <span class="line"><span style="color:#D4D4D4">  });</span></span>
 <span class="line"><span style="color:#D4D4D4">}</span></span>
 <span class="line"></span>
@@ -172,7 +172,7 @@
 <span class="line"><span style="color:#D4D4D4">  }</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#569CD6">  get</span><span style="color:#DCDCAA"> values</span><span style="color:#D4D4D4">() {</span></span>
-<span class="line"><span style="color:#569CD6">    const</span><span style="color: #9CDCFE;"> result</span><span style="color:#D4D4D4"> = [];</span></span>
+<span class="line"><span style="color:#569CD6">    const</span><span style="color:#9CDCFE;"> result</span><span style="color:#D4D4D4"> = [];</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A9955">    // for (let key of Object.keys(this.collection)) {</span></span>
 <span class="line"><span style="color:#6A9955">    //   result.push(this.collection[key]);</span></span>
@@ -188,7 +188,7 @@
 <span class="line"><span style="color:#D4D4D4">  }</span></span>
 <span class="line"><span style="color:#D4D4D4">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> map</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> MyMap</span><span style="color:#D4D4D4">();</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> map</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> MyMap</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"><span style="color:#9CDCFE">map</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">set</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'arms'</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">2</span><span style="color:#D4D4D4">);</span></span>
 <span class="line"><span style="color:#9CDCFE">map</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">set</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'fingers'</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">10</span><span style="color:#D4D4D4">);</span></span>
 <span class="line"><span style="color:#9CDCFE">map</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">set</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'eyes'</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">2</span><span style="color:#D4D4D4">);</span></span>
@@ -201,12 +201,12 @@
 <span class="line"><span style="color:#9CDCFE">console</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">log</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">map</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">has</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'valueOf'</span><span style="color:#D4D4D4">)); </span><span style="color:#6A9955">// =&gt; false</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A9955">// ES6 built-in Map class implementation:</span></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> map2</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> Map</span><span style="color:#D4D4D4">();</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> map2</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> Map</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"><span style="color:#9CDCFE">map2</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">has</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'hands'</span><span style="color:#D4D4D4">); </span><span style="color:#6A9955">// =&gt; false</span></span>
 <span class="line"><span style="color:#9CDCFE">map2</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">entries</span><span style="color:#D4D4D4">(); </span><span style="color:#6A9955">// MapIterator (Object like)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> keyObj1</span><span style="color:#D4D4D4"> = {};</span></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> keyObj2</span><span style="color:#D4D4D4"> = {};</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> keyObj1</span><span style="color:#D4D4D4"> = {};</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> keyObj2</span><span style="color:#D4D4D4"> = {};</span></span>
 <span class="line"><span style="color:#569CD6">const</span><span style="color:#DCDCAA"> keyFunc1</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">function</span><span style="color:#D4D4D4">() {};</span></span>
 <span class="line"><span style="color:#569CD6">const</span><span style="color:#DCDCAA"> keyFunc2</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">function</span><span style="color:#D4D4D4">() {};</span></span>
 <span class="line"></span>
@@ -243,13 +243,13 @@
 <span class="line"><span style="color:#9CDCFE">console</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">log</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">map2</span><span style="color:#D4D4D4">); </span><span style="color:#6A9955">// =&gt; Map(0) {}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A9955">// you can initialize a map with an iterator:</span></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> m3</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> Map</span><span style="color:#D4D4D4">([[</span><span style="color:#CE9178">'a'</span><span style="color:#D4D4D4">, </span><span style="color:#569CD6">true</span><span style="color:#D4D4D4">],[</span><span style="color:#CE9178">'string'</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">'str'</span><span style="color:#D4D4D4">]]);</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> m3</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> Map</span><span style="color:#D4D4D4">([[</span><span style="color:#CE9178">'a'</span><span style="color:#D4D4D4">, </span><span style="color:#569CD6">true</span><span style="color:#D4D4D4">],[</span><span style="color:#CE9178">'string'</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">'str'</span><span style="color:#D4D4D4">]]);</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#569CD6">const</span><span style="color:#DCDCAA"> gen</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">function*</span><span style="color:#D4D4D4"> (</span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4">) {</span></span>
 <span class="line"><span style="color:#C586C0">  if</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4">&gt;</span><span style="color:#B5CEA8">3</span><span style="color:#D4D4D4">) </span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4"> = </span><span style="color:#B5CEA8">0</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"><span style="color:#C586C0">  while</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4"> &lt;= </span><span style="color:#B5CEA8">3</span><span style="color:#D4D4D4">) </span><span style="color:#C586C0">yield</span><span style="color:#D4D4D4"> [</span><span style="color:#CE9178">`key</span><span style="color:#569CD6">${</span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4">++</span><span style="color:#569CD6">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4">];</span></span>
 <span class="line"><span style="color:#D4D4D4">}</span></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> m4</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> Map</span><span style="color:#D4D4D4">(</span><span style="color:#DCDCAA">gen</span><span style="color:#D4D4D4">(</span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">));</span></span></code></pre>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> m4</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> Map</span><span style="color:#D4D4D4">(</span><span style="color:#DCDCAA">gen</span><span style="color:#D4D4D4">(</span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">));</span></span></code></pre>
 
 <h2>Heap</h2>
 
@@ -282,7 +282,7 @@
 <span class="line"><span style="color:#C586C0">      return</span><span style="color:#569CD6"> this</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">pop</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"><span style="color:#D4D4D4">    }</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">    const</span><span style="color: #9CDCFE;"> biggest</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">this</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">[</span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">];</span></span>
+<span class="line"><span style="color:#569CD6">    const</span><span style="color:#9CDCFE;"> biggest</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">this</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">[</span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">];</span></span>
 <span class="line"><span style="color:#569CD6">    this</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">[</span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">] = </span><span style="color:#569CD6">this</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">pop</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"><span style="color:#569CD6">    let</span><span style="color:#9CDCFE"> i</span><span style="color:#D4D4D4"> = </span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"><span style="color:#569CD6">    let</span><span style="color:#9CDCFE"> left</span><span style="color:#D4D4D4"> = </span><span style="color:#9CDCFE">i</span><span style="color:#D4D4D4"> * </span><span style="color:#B5CEA8">2</span><span style="color:#D4D4D4">;</span></span>
@@ -306,7 +306,7 @@
 <span class="line"><span style="color:#D4D4D4">  }</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#DCDCAA">  sort</span><span style="color:#D4D4D4">() {</span></span>
-<span class="line"><span style="color:#569CD6">    const</span><span style="color: #9CDCFE;"> arr</span><span style="color:#D4D4D4"> = [];</span></span>
+<span class="line"><span style="color:#569CD6">    const</span><span style="color:#9CDCFE;"> arr</span><span style="color:#D4D4D4"> = [];</span></span>
 <span class="line"><span style="color:#C586C0">    while</span><span style="color:#D4D4D4">(</span><span style="color:#569CD6">this</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">length</span><span style="color:#D4D4D4"> &gt; </span><span style="color:#B5CEA8">1</span><span style="color:#D4D4D4">) {</span></span>
 <span class="line"><span style="color:#9CDCFE">      arr</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">push</span><span style="color:#D4D4D4">(</span><span style="color:#569CD6">this</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">remove</span><span style="color:#D4D4D4">());</span></span>
 <span class="line"><span style="color:#D4D4D4">    }</span></span>
@@ -314,7 +314,7 @@
 <span class="line"><span style="color:#D4D4D4">  }</span></span>
 <span class="line"><span style="color:#D4D4D4">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #9CDCFE;"> heap</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> MaxHeap</span><span style="color:#D4D4D4">();</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;"> heap</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> MaxHeap</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">insert</span><span style="color:#D4D4D4">(</span><span style="color:#B5CEA8">3</span><span style="color:#D4D4D4">);</span></span>
 <span class="line"><span style="color:#9CDCFE">heap</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">insert</span><span style="color:#D4D4D4">(</span><span style="color:#B5CEA8">2</span><span style="color:#D4D4D4">);</span></span>
@@ -364,7 +364,7 @@
 <span class="line"><span style="color:#569CD6">type</span><span style="color:#4EC9B0"> Code</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Programming</span><span style="color:#D4D4D4">.</span><span style="color:#4EC9B0">Code</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#569CD6">function</span><span style="color:#DCDCAA"> isTomSssM</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">value</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">unknown</span><span style="color:#D4D4D4">): </span><span style="color:#9CDCFE">value</span><span style="color:#569CD6"> is</span><span style="color:#4EC9B0"> TomSssM</span><span style="color:#D4D4D4"> {</span></span>
-<span class="line"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> { </span><span style="color: #9CDCFE;">code</span><span style="color:#D4D4D4"> } = </span><span style="color:#9CDCFE">value</span><span style="color:#C586C0"> as</span><span style="color:#D4D4D4"> {</span><span style="color:#9CDCFE">code</span><span style="color:#D4D4D4">?: </span><span style="color:#4EC9B0">boolean</span><span style="color:#D4D4D4">};</span></span>
+<span class="line"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE;">code</span><span style="color:#D4D4D4"> } = </span><span style="color:#9CDCFE">value</span><span style="color:#C586C0"> as</span><span style="color:#D4D4D4"> {</span><span style="color:#9CDCFE">code</span><span style="color:#D4D4D4">?: </span><span style="color:#4EC9B0">boolean</span><span style="color:#D4D4D4">};</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#C586C0">  return</span><span style="color:#569CD6"> typeof</span><span style="color:#9CDCFE"> code</span><span style="color:#D4D4D4"> === </span><span style="color:#CE9178">'boolean'</span><span style="color:#D4D4D4">;</span></span>
 <span class="line"><span style="color:#D4D4D4">}</span></span>
@@ -395,7 +395,7 @@
 <span class="line"><span style="color:#D4D4D4">  }</span></span>
 <span class="line"><span style="color:#D4D4D4">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#569CD6">const</span><span style="color: #4FC1FF;color: #9CDCFE;"> person</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> TomSssM</span><span style="color:#D4D4D4">();</span></span>
+<span class="line"><span style="color:#569CD6">const</span><span style="color:#9CDCFE;color:#9CDCFE;"> person</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">new</span><span style="color:#DCDCAA"> TomSssM</span><span style="color:#D4D4D4">();</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#C586C0">if</span><span style="color:#D4D4D4"> (!</span><span style="color:#DCDCAA">isTomSssM</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">person</span><span style="color:#D4D4D4">)) {</span></span>
 <span class="line"><span style="color:#C586C0">  throw</span><span style="color:#569CD6"> new</span><span style="color:#DCDCAA"> Error</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">'Give TomSssM'</span><span style="color:#D4D4D4">);</span></span>
